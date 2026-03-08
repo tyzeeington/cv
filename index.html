@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sean Young — Principal AI Engineer | Bloom CV</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bloom: #00FFB2;
+    --bloom-dim: #00cc8e;
+    --bg: #050D0A;
+    --surface: #0A1A13;
+    --card: #0F2318;
+    --border: rgba(0,255,178,0.12);
+    --text: #E8F5F0;
+    --muted: #6B9E87;
+    --ai-purple: #A78BFA;
+    --agent-blue: #4ECDC4;
+    --infra-coral: #FF6B6B;
+    --data-orange: #FFB347;
+    --sys-pink: #FF69B4;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px 80px;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 50% 30% at 15% 10%, rgba(167,139,250,0.06) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 50% at 85% 85%, rgba(0,255,178,0.04) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .page-header {
+    text-align: center;
+    margin-bottom: 40px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards;
+  }
+
+  .logo {
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--ai-purple);
+    margin-bottom: 6px;
+  }
+
+  .tagline {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.03em;
+  }
+
+  .cv-card {
+    width: 100%;
+    max-width: 680px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 28px;
+    padding: 40px;
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.15s ease forwards;
+    box-shadow: 0 0 0 1px rgba(167,139,250,0.05), 0 40px 80px rgba(0,0,0,0.5);
+  }
+
+  .cv-card::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 180px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--ai-purple), transparent);
+  }
+
+  .cv-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(167,139,250,0.012) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(167,139,250,0.012) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    border-radius: 28px;
+  }
+
+  /* Identity */
+  .identity {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 28px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .avatar-wrap { position: relative; flex-shrink: 0; }
+
+  .avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--ai-purple) 0%, #7C3AED 50%, #4C1D95 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-size: 26px;
+    font-weight: 800;
+    color: white;
+  }
+
+  .avatar::after {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    border: 1px solid rgba(167,139,250,0.4);
+    animation: pulse-ring 3s ease infinite;
+  }
+
+  @keyframes pulse-ring {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(1.04); }
+  }
+
+  .status-dot {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    width: 14px;
+    height: 14px;
+    background: var(--bloom);
+    border-radius: 50%;
+    border: 2.5px solid var(--card);
+  }
+
+  .identity-info { flex: 1; }
+
+  .name {
+    font-family: 'Syne', sans-serif;
+    font-size: 26px;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 4px;
+  }
+
+  .name span { color: var(--ai-purple); }
+
+  .title-role {
+    font-size: 14px;
+    color: var(--ai-purple);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    margin-bottom: 6px;
+  }
+
+  .meta-line {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 300;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .meta-line a {
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .meta-line a:hover { color: var(--ai-purple); }
+
+  .bloom-id {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(167,139,250,0.08);
+    border: 1px solid rgba(167,139,250,0.2);
+    border-radius: 20px;
+    padding: 3px 10px;
+    font-size: 11px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--ai-purple);
+    margin-top: 6px;
+  }
+
+  .bloom-id::before { content: '⬡'; font-size: 9px; }
+
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 24px 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  .bio {
+    font-size: 14px;
+    line-height: 1.75;
+    color: #9FC4B5;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+    font-weight: 300;
+  }
+
+  .section-label {
+    font-family: 'Syne', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 14px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* AI Focus Banner */
+  .ai-focus-banner {
+    background: linear-gradient(135deg, rgba(167,139,250,0.08) 0%, rgba(0,255,178,0.04) 100%);
+    border: 1px solid rgba(167,139,250,0.2);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .ai-focus-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ai-purple);
+    margin-bottom: 10px;
+    letter-spacing: 0.05em;
+  }
+
+  .ai-focus-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .ai-focus-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--text);
+    font-weight: 400;
+  }
+
+  .ai-focus-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* Tags */
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .tag {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border: 1px solid;
+    cursor: default;
+    transition: all 0.2s ease;
+  }
+
+  .tag:hover { transform: translateY(-1px); }
+
+  .tag-ai     { color: var(--ai-purple); border-color: rgba(167,139,250,0.3); background: rgba(167,139,250,0.06); }
+  .tag-agent  { color: var(--agent-blue); border-color: rgba(78,205,196,0.3); background: rgba(78,205,196,0.06); }
+  .tag-infra  { color: var(--infra-coral); border-color: rgba(255,107,107,0.3); background: rgba(255,107,107,0.06); }
+  .tag-data   { color: var(--data-orange); border-color: rgba(255,179,71,0.3); background: rgba(255,179,71,0.06); }
+  .tag-sys    { color: var(--bloom); border-color: rgba(0,255,178,0.3); background: rgba(0,255,178,0.06); }
+
+  /* Nav tabs */
+  .cv-tabs {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+    overflow-x: auto;
+  }
+
+  .cv-tab {
+    padding: 7px 14px;
+    font-family: 'Syne', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+
+  .cv-tab:hover { color: var(--text); background: rgba(255,255,255,0.04); }
+
+  .cv-tab.active {
+    color: var(--ai-purple);
+    background: rgba(167,139,250,0.08);
+    border-color: rgba(167,139,250,0.2);
+  }
+
+  .cv-section { display: none; position: relative; z-index: 1; }
+  .cv-section.active { display: block; }
+
+  /* Project cards */
+  .projects {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .project-card {
+    padding: 16px 18px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 16px;
+    cursor: default;
+    transition: all 0.25s ease;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+
+  .project-card:hover {
+    background: rgba(167,139,250,0.04);
+    border-color: rgba(167,139,250,0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  }
+
+  .project-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .project-info { flex: 1; }
+
+  .project-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 3px;
+  }
+
+  .project-desc {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.5;
+    font-weight: 300;
+  }
+
+  .project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 8px;
+  }
+
+  .tech-tag {
+    font-size: 9px;
+    font-family: 'JetBrains Mono', monospace;
+    padding: 2px 7px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.05);
+    color: var(--muted);
+  }
+
+  .project-badge {
+    font-size: 9px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    padding: 3px 8px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .badge-live    { background: rgba(0,255,178,0.12); color: var(--bloom); }
+  .badge-proto   { background: rgba(255,179,71,0.12); color: #FFB347; }
+  .badge-concept { background: rgba(212,168,255,0.12); color: #D4A8FF; }
+
+  /* Experience cards */
+  .exp-card {
+    padding: 16px 18px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 16px;
+    margin-bottom: 12px;
+    transition: all 0.2s ease;
+  }
+
+  .exp-card:hover { border-color: rgba(167,139,250,0.1); }
+
+  .exp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 6px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .exp-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+  }
+
+  .exp-company {
+    font-size: 13px;
+    color: var(--ai-purple);
+    font-weight: 500;
+  }
+
+  .exp-date {
+    font-size: 11px;
+    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .exp-bullets {
+    list-style: none;
+    margin-top: 10px;
+  }
+
+  .exp-bullets li {
+    font-size: 12.5px;
+    color: #9FC4B5;
+    line-height: 1.65;
+    padding-left: 16px;
+    position: relative;
+    margin-bottom: 6px;
+    font-weight: 300;
+  }
+
+  .exp-bullets li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--ai-purple);
+    opacity: 0.5;
+  }
+
+  /* AI Depth section */
+  .ai-depth-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .ai-depth-card {
+    padding: 16px;
+    background: rgba(167,139,250,0.04);
+    border: 1px solid rgba(167,139,250,0.12);
+    border-radius: 14px;
+    transition: all 0.2s;
+  }
+
+  .ai-depth-card:hover {
+    border-color: rgba(167,139,250,0.25);
+    transform: translateY(-1px);
+  }
+
+  .ai-depth-icon {
+    font-size: 20px;
+    margin-bottom: 8px;
+  }
+
+  .ai-depth-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .ai-depth-desc {
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.5;
+    font-weight: 300;
+  }
+
+  /* Socials */
+  .socials {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .social-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px;
+    text-decoration: none;
+    color: var(--text);
+    font-size: 13px;
+    transition: all 0.2s ease;
+  }
+
+  .social-link:hover {
+    background: rgba(167,139,250,0.06);
+    border-color: rgba(167,139,250,0.2);
+    transform: translateY(-1px);
+  }
+
+  .social-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  .edu-block {
+    padding: 14px 18px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 14px;
+    margin-bottom: 24px;
+  }
+
+  .edu-degree {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 3px;
+  }
+
+  .edu-school {
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .cta-btn {
+    width: 100%;
+    padding: 16px;
+    background: var(--ai-purple);
+    border: none;
+    border-radius: 16px;
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: white;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    overflow: hidden;
+    text-decoration: none;
+  }
+
+  .cta-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 60%);
+  }
+
+  .cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(167,139,250,0.3);
+  }
+
+  .token-line {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 16px;
+    padding: 12px 16px;
+    background: rgba(0,255,178,0.04);
+    border: 1px solid rgba(0,255,178,0.1);
+    border-radius: 12px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .token-label {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 300;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .token-badge {
+    font-family: 'Syne', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--bloom);
+  }
+
+  .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 24px;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.6s ease forwards;
+  }
+
+  .footer-bloom {
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(167,139,250,0.4);
+  }
+
+  .footer-dot {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: rgba(167,139,250,0.3);
+  }
+
+  .stagger > * {
+    opacity: 0;
+    animation: fadeUp 0.4s ease forwards;
+  }
+  .stagger > *:nth-child(1) { animation-delay: 0.05s; }
+  .stagger > *:nth-child(2) { animation-delay: 0.1s; }
+  .stagger > *:nth-child(3) { animation-delay: 0.15s; }
+  .stagger > *:nth-child(4) { animation-delay: 0.2s; }
+  .stagger > *:nth-child(5) { animation-delay: 0.25s; }
+  .stagger > *:nth-child(6) { animation-delay: 0.3s; }
+  .stagger > *:nth-child(7) { animation-delay: 0.35s; }
+  .stagger > *:nth-child(8) { animation-delay: 0.4s; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media print {
+    body { background: white; padding: 0; }
+    .cv-card { box-shadow: none; border: 1px solid #ddd; max-width: 100%; }
+    .page-header, .card-footer, .token-line, .cta-btn { display: none; }
+    .cv-section { display: block !important; }
+    .cv-tabs { display: none; }
+  }
+
+  @media (max-width: 480px) {
+    .cv-card { padding: 24px; border-radius: 20px; }
+    .identity { flex-direction: column; text-align: center; }
+    .socials, .ai-depth-grid, .ai-focus-grid { grid-template-columns: 1fr; }
+    .name { font-size: 22px; }
+    .meta-line { justify-content: center; }
+    .bloom-id { margin: 6px auto 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="logo">Bloom CV</div>
+  <div class="tagline">builds things people love. ships things that work.</div>
+</div>
+
+<div class="cv-card">
+
+  <!-- Identity -->
+  <div class="identity">
+    <div class="avatar-wrap">
+      <div class="avatar">SY</div>
+      <div class="status-dot"></div>
+    </div>
+    <div class="identity-info">
+      <div class="name">Sean <span>Young</span></div>
+      <div class="title-role">Principal AI Engineer · Systems Architect</div>
+      <div class="meta-line">
+        <span>419.913.7567</span>
+        <span>·</span>
+        <a href="/cdn-cgi/l/email-protection#a6d5d6dfe6d5c3c7c8dfc9d3c8c188c4cfdc"><span class="__cf_email__" data-cfemail="2a595a536a594f4b4453455f444d04484350">[email&#160;protected]</span></a>
+        <span>·</span>
+        <span>New York, NY</span>
+      </div>
+      <div class="meta-line" style="margin-top:4px;">
+        <a href="https://linkedin.com/in/sean-young-15255a11a" target="_blank">LinkedIn</a>
+        <span>·</span>
+        <a href="https://github.com/tyzeeington" target="_blank">GitHub</a>
+      </div>
+      <div class="bloom-id">bloom/spacecowboy9</div>
+    </div>
+  </div>
+
+  <!-- Bio -->
+  <div class="bio">
+    I'm an AI engineer and researcher who builds systems and creative tools. Spent 7+ years in enterprise — JPMorgan Chase, Bank of America — shipping microservices at scale, breaking apart monoliths, and mentoring teams. Now I'm channeling all of that into building my own ecosystem of AI-powered platforms: agent orchestration, music production tools, creator discovery networks, the whole thing. I think a lot about how technology can drive better outcomes for people, not just better metrics. Here for a long time and a good time. ✦
+  </div>
+
+  <!-- AI Focus Banner -->
+  <div class="ai-focus-banner">
+    <div class="ai-focus-title">🧠 What I Focus On</div>
+    <div class="ai-focus-grid">
+      <div class="ai-focus-item">
+        <div class="ai-focus-dot" style="background:var(--ai-purple);"></div>
+        Multi-Agent Orchestration
+      </div>
+      <div class="ai-focus-item">
+        <div class="ai-focus-dot" style="background:var(--agent-blue);"></div>
+        LLM Integration & RAG
+      </div>
+      <div class="ai-focus-item">
+        <div class="ai-focus-dot" style="background:var(--bloom);"></div>
+        AI-Native CI/CD & DevOps
+      </div>
+      <div class="ai-focus-item">
+        <div class="ai-focus-dot" style="background:var(--data-orange);"></div>
+        Recommendation Systems
+      </div>
+      <div class="ai-focus-item">
+        <div class="ai-focus-dot" style="background:var(--infra-coral);"></div>
+        Generative AI Applications
+      </div>
+      <div class="ai-focus-item">
+        <div class="ai-focus-dot" style="background:var(--sys-pink);"></div>
+        Event-Driven Agent Mesh
+      </div>
+    </div>
+  </div>
+
+  <!-- Tags -->
+  <div class="tags">
+    <span class="tag tag-ai">Agent Systems</span>
+    <span class="tag tag-ai">Generative AI</span>
+    <span class="tag tag-ai">LLM / RAG</span>
+    <span class="tag tag-agent">Distributed Systems</span>
+    <span class="tag tag-infra">Kubernetes</span>
+    <span class="tag tag-data">Java · Python · TS</span>
+    <span class="tag tag-sys">Platform Engineering</span>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Tabs -->
+  <div class="cv-tabs">
+    <button class="cv-tab active" onclick="switchTab('ai-depth')">AI Work</button>
+    <button class="cv-tab" onclick="switchTab('systems')">What I'm Building</button>
+    <button class="cv-tab" onclick="switchTab('enterprise')">Enterprise</button>
+    <button class="cv-tab" onclick="switchTab('connect')">Say Hi</button>
+  </div>
+
+  <!-- ========== AI DEPTH TAB ========== -->
+  <div class="cv-section active" id="ai-depth">
+    <div class="section-label">How I Think About AI</div>
+
+    <div class="ai-depth-grid stagger">
+      <div class="ai-depth-card">
+        <div class="ai-depth-icon">🕸️</div>
+        <div class="ai-depth-title">Mycelium Agent Network</div>
+        <div class="ai-depth-desc">I modeled agent orchestration after how mycelium networks distribute nutrients in nature. 12+ agents across AI, audio, web3, and social — talking to each other through NATS/Redis Streams, no hard coupling. The system breathes.</div>
+      </div>
+      <div class="ai-depth-card">
+        <div class="ai-depth-icon">🤖</div>
+        <div class="ai-depth-title">AI Compose Agent</div>
+        <div class="ai-depth-desc">A generative music agent that lives inside the DAW I'm building. It suggests arrangements, recommends samples, and co-creates with the producer in real-time. Not replacing creativity — amplifying it.</div>
+      </div>
+      <div class="ai-depth-card">
+        <div class="ai-depth-icon">🔍</div>
+        <div class="ai-depth-title">Discovery & Recommendation</div>
+        <div class="ai-depth-desc">Built a recommendation engine that does the opposite of what most platforms do — it surfaces people who are coming up, not people who are already loud. Custom ranking, pgvector embeddings, content moderation pipeline.</div>
+      </div>
+      <div class="ai-depth-card">
+        <div class="ai-depth-icon">🚀</div>
+        <div class="ai-depth-title">AI-Native CI/CD</div>
+        <div class="ai-depth-desc">CI/CD platform where AI generates tests, agents execute autonomously, and the system gives you real-time feedback on what's happening in the pipeline. Wrote the docs so agents could actually follow them.</div>
+      </div>
+      <div class="ai-depth-card">
+        <div class="ai-depth-icon">🧬</div>
+        <div class="ai-depth-title">AI Compatibility Matching</div>
+        <div class="ai-depth-desc">For vibeSPACE — AI figures out who you'd actually want to talk to after an event. Multi-dimensional interest vectors and behavioral signals, not just "you both like tech." Authentic connections.</div>
+      </div>
+      <div class="ai-depth-card">
+        <div class="ai-depth-icon">📊</div>
+        <div class="ai-depth-title">Prompt Engineering & LLM</div>
+        <div class="ai-depth-desc">I work with LLMs daily — prompt engineering, RAG pipelines, integration patterns. Every platform in the ecosystem has AI woven into it because that's how I think about building now. It's not a feature, it's the foundation.</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section-label">Tools & Patterns I Work With</div>
+    <div class="tags" style="margin-bottom:16px;">
+      <span class="tag tag-ai">Multi-Agent Orchestration</span>
+      <span class="tag tag-ai">RAG Pipelines</span>
+      <span class="tag tag-ai">Vector Search (pgvector)</span>
+      <span class="tag tag-ai">Generative AI</span>
+      <span class="tag tag-ai">Prompt Engineering</span>
+      <span class="tag tag-agent">Event-Driven Mesh</span>
+      <span class="tag tag-agent">NATS / Redis Streams</span>
+      <span class="tag tag-agent">Microservices</span>
+      <span class="tag tag-infra">Kubernetes / OpenShift</span>
+      <span class="tag tag-infra">Jenkins CI/CD</span>
+      <span class="tag tag-infra">Docker</span>
+      <span class="tag tag-data">Postgres + TimescaleDB</span>
+      <span class="tag tag-data">IPFS</span>
+      <span class="tag tag-sys">AWS / GCP</span>
+      <span class="tag tag-sys">Spring Boot</span>
+      <span class="tag tag-sys">React</span>
+    </div>
+  </div>
+
+  <!-- ========== SYSTEMS BUILT TAB ========== -->
+  <div class="cv-section" id="systems">
+    <div class="section-label">What I'm Building</div>
+    <div class="projects stagger">
+
+      <div class="project-card">
+        <div class="project-icon" style="background:rgba(167,139,250,0.1);">🧠</div>
+        <div class="project-info">
+          <div class="project-name">Mycelium Agent Network</div>
+          <div class="project-desc">The nervous system underneath everything. 12+ agents managing AI, audio, web3, social, and storage — all talking through an async event mesh inspired by how mycelium distributes resources in nature.</div>
+          <div class="project-tech">
+            <span class="tech-tag">NATS</span>
+            <span class="tech-tag">Redis Streams</span>
+            <span class="tech-tag">Kubernetes</span>
+            <span class="tech-tag">Postgres</span>
+          </div>
+        </div>
+        <div class="project-badge badge-proto">Proto</div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-icon" style="background:rgba(0,255,178,0.1);">🌐</div>
+        <div class="project-info">
+          <div class="project-name">Bloom Network</div>
+          <div class="project-desc">A creator discovery platform that actually puts up-and-coming people first. Digital identity cards you can bump via NFC, a web3 ad network, and Bloom token pegged 1:1 to USDC.</div>
+          <div class="project-tech">
+            <span class="tech-tag">Spring Boot</span>
+            <span class="tech-tag">pgvector</span>
+            <span class="tech-tag">Solana</span>
+            <span class="tech-tag">React</span>
+          </div>
+        </div>
+        <div class="project-badge badge-live">Live</div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-icon" style="background:rgba(255,179,71,0.1);">🎹</div>
+        <div class="project-info">
+          <div class="project-name">Bloom Visual DAW</div>
+          <div class="project-desc">Music production in the browser with an AI co-producer. Arrangement, mixer, piano roll, FX chain — plus smart contract royalty splitting so collaborators get paid automatically.</div>
+          <div class="project-tech">
+            <span class="tech-tag">Web Audio API</span>
+            <span class="tech-tag">AI Agents</span>
+            <span class="tech-tag">WebRTC</span>
+          </div>
+        </div>
+        <div class="project-badge badge-proto">Proto</div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-icon" style="background:rgba(78,205,196,0.1);">🚀</div>
+        <div class="project-info">
+          <div class="project-name">Digital Dash Production</div>
+          <div class="project-desc">CI/CD that thinks. AI writes the tests, agents run the pipeline, and you get real-time feedback on what shipped and what didn't. Built the docs so agents can actually be autonomous.</div>
+          <div class="project-tech">
+            <span class="tech-tag">Jenkins</span>
+            <span class="tech-tag">Docker</span>
+            <span class="tech-tag">AI Testing</span>
+          </div>
+        </div>
+        <div class="project-badge badge-live">Live</div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-icon" style="background:rgba(255,107,107,0.1);">🎵</div>
+        <div class="project-info">
+          <div class="project-name">CentralStatic</div>
+          <div class="project-desc">AI-curated music discovery that supports independent artists through SoundCloud. The algorithm looks for who's emerging, not who's already dominating.</div>
+          <div class="project-tech">
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">ML</span>
+            <span class="tech-tag">SoundCloud API</span>
+          </div>
+        </div>
+        <div class="project-badge badge-live">Live</div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-icon" style="background:rgba(255,105,180,0.1);">🤝</div>
+        <div class="project-info">
+          <div class="project-name">vibeSPACE</div>
+          <div class="project-desc">You go to an event, meet people, then what? vibeSPACE uses AI matching to connect you with the right people after. Solana smart contracts handle tokenized engagement.</div>
+          <div class="project-tech">
+            <span class="tech-tag">Solana</span>
+            <span class="tech-tag">AI Matching</span>
+            <span class="tech-tag">React</span>
+          </div>
+        </div>
+        <div class="project-badge badge-proto">Proto</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========== ENTERPRISE TAB ========== -->
+  <div class="cv-section" id="enterprise">
+    <div class="section-label">Where I Learned to Build at Scale</div>
+
+    <div class="exp-card">
+      <div class="exp-header">
+        <div>
+          <div class="exp-title">Lead Developer</div>
+          <div class="exp-company">Bank of America · New York, NY</div>
+        </div>
+        <div class="exp-date">Jan 2025 – Present</div>
+      </div>
+      <ul class="exp-bullets">
+        <li>Built 5+ microservices for an integration hub that centralized how internal platforms talk to each other</li>
+        <li>Wrapped Seismic's external APIs behind a gateway so consuming teams get clean, standardized endpoints</li>
+        <li>Automated the associate onboarding process — user provisioning, role management, all the stuff that used to be manual</li>
+        <li>Set up Jenkins pipelines and OpenShift deployments across all the services. Everything ships through CI/CD</li>
+      </ul>
+    </div>
+
+    <div class="exp-card">
+      <div class="exp-header">
+        <div>
+          <div class="exp-title">Full Stack Java Engineer</div>
+          <div class="exp-company">J.P. Morgan Chase · Columbus, OH / New York, NY</div>
+        </div>
+        <div class="exp-date">Mar 2020 – May 2025</div>
+      </div>
+      <ul class="exp-bullets">
+        <li>Took a test data framework that lived in Excel spreadsheets and turned it into a Spring Boot microservice ecosystem. 35,000+ datasets, 9 environments, 99.9% integrity</li>
+        <li>Led the decomposition of a legacy monolith into 15 separate microservices — nothing broke in the process</li>
+        <li>Rewrote a high-traffic SOAP API as a RESTful service on Java 17 and Kubernetes. 20M+ users depend on it</li>
+        <li>Built a bunch of internal tools: key retrieval service, test data monitor (Spring Boot + React on Cloud Foundry), data generation pipelines</li>
+        <li>Mentored 5-7 developers and 3 managers. Taught the team cloud tooling, automation, and how to think about CI/CD</li>
+      </ul>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section-label">Education</div>
+    <div class="edu-block">
+      <div class="edu-degree">B.S. Information Technology</div>
+      <div class="edu-school">University of South Florida · College of Engineering · Tampa, FL</div>
+    </div>
+  </div>
+
+  <!-- ========== CONNECT TAB ========== -->
+  <div class="cv-section" id="connect">
+    <div class="section-label">Connected</div>
+    <div class="socials">
+      <a class="social-link" href="/cdn-cgi/l/email-protection#3c4f4c457c4f595d52455349525b125e5546">
+        <div class="social-icon" style="background:rgba(167,139,250,0.1);">✉️</div>
+        <span>Email</span>
+      </a>
+      <a class="social-link" href="https://linkedin.com/in/sean-young-15255a11a" target="_blank">
+        <div class="social-icon" style="background:rgba(0,150,255,0.1);">💼</div>
+        <span>LinkedIn</span>
+      </a>
+      <a class="social-link" href="https://github.com/tyzeeington" target="_blank">
+        <div class="social-icon" style="background:rgba(255,255,255,0.08);">💻</div>
+        <span>GitHub</span>
+      </a>
+      <a class="social-link" href="tel:4199137567">
+        <div class="social-icon" style="background:rgba(167,139,250,0.1);">📱</div>
+        <span>419.913.7567</span>
+      </a>
+    </div>
+
+    <a class="cta-btn" href="/cdn-cgi/l/email-protection#85f6f5fcc5f6e0e4ebfceaf0ebe2abe7ecff">
+      <span>🧠</span>
+      Let's Build Together
+    </a>
+
+    <div class="token-line">
+      <span class="token-label">💎 Bloom Network · 1:1 USDC</span>
+      <span class="token-badge">$BLOOM</span>
+    </div>
+  </div>
+
+</div>
+
+<div class="card-footer">
+  <span class="footer-bloom">Bloom</span>
+  <div class="footer-dot"></div>
+  <span class="footer-bloom">Space Cowboy #9</span>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+function switchTab(tabId) {
+  document.querySelectorAll('.cv-tab').forEach(function(t) { t.classList.remove('active'); });
+  document.querySelectorAll('.cv-section').forEach(function(s) { s.classList.remove('active'); });
+  document.getElementById(tabId).classList.add('active');
+
+  // Find the clicked tab button and activate it
+  document.querySelectorAll('.cv-tab').forEach(function(tab) {
+    if (tab.getAttribute('onclick').indexOf(tabId) !== -1) {
+      tab.classList.add('
